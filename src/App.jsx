@@ -44,6 +44,7 @@ function App() {
     e.preventDefault();
     // Verificando se o e-mail e senha batem com o usuário cadastrado
     if (
+      nomeLogin === usuarioCadastrado?.nome &&
       emailLogin === usuarioCadastrado?.email &&
       senhaLogin === usuarioCadastrado?.senha
     ) {

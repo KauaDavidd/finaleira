@@ -7,7 +7,7 @@ function Reserve() {
   const [token, setToken] = useState(localStorage.getItem('token')); // Armazena o token JWT
  
   useEffect(() => {
-    axios.get('http://localhost:8000/reserva/')
+    axios.get('http://localhost:8000/api/reserva/')
       .then((response) => {
         setDates(response.data);
       })
@@ -17,7 +17,7 @@ function Reserve() {
   }, []);
  
   const handleReserve = () => {
-    axios.post('http://localhost:8000/reserva/verificar/', { date: selectedDate }, {
+    axios.post('http://localhost:8000/api/reserva/verificar/', { date: selectedDate }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -76,7 +76,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import Login from "./login";
-import Reserve from "./Reserve";
+import Reserve from "./reserve";
 import Signup from "./Signup";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -86,7 +86,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/reserve" element={<Reserve />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/signup" element={<S ignup />} />
         <Route path="*" element={<h1>Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>

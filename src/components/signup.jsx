@@ -11,11 +11,11 @@ const Signup = () => {
     event.preventDefault();
 
     // Dados a serem enviados
-    const userData = { nome, email, senha };
+    const userData = { nome:nome, email:email, senha:senha };
 
     // Realizando a requisição POST para cadastrar o usuário
     axios
-      .post("http://127.0.0.1:8000/", userData)
+      .post(`http://localhost:8000/api/usuarios/cadastrar/`, userData)
       .then((response) => {
         setMensagem("Usuário cadastrado com sucesso!");
         // Aqui você pode redirecionar ou fazer outras ações após o cadastro

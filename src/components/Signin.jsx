@@ -8,9 +8,9 @@ function Signup() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const userData = { username: nome, email, password: senha};
+        const userData = { username: nome, email: email, password: senha};
         try {
-            await axios.post('http://localhost:8000/register/', userData);
+            await axios.post(`http://localhost:8000/api/usuarios/cadastrar/`, userData);
             alert('Usuário registrado com sucesso!');
         }   catch (error){
             alert('Erro ao registrar usuário');

@@ -7,7 +7,7 @@ function Reserve() {
   const [token, setToken] = useState(localStorage.getItem('token')); // Armazena o token JWT
  
   useEffect(() => {
-    axios.get('http://localhost:8000/available_dates/')
+    axios.get('http://localhost:8000/reserva/')
       .then((response) => {
         setDates(response.data);
       })
@@ -17,12 +17,12 @@ function Reserve() {
   }, []);
  
   const handleReserve = () => {
-    axios.post('http://localhost:8000/reserve/', { date: selectedDate }, {
+    axios.post('http://localhost:8000/reserva/verificar/', { date: selectedDate }, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     })
-      .then((response) => {
+      .then((response) => {talyssonemail:
         alert('Reserva realizada com sucesso!');
       })
       .catch((error) => {

@@ -1,13 +1,139 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/notebook.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema de Reservas</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Reservas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f9;
+    }
+
+    .App {
+      width: 100%;
+      max-width: 400px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    p {
+      text-align: center;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="App">
+    <h1>Sistema de Reservas</h1>
+    <form id="reservationForm" class="form-container">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" required />
+      </div>
+
+      <div class="form-group">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" required maxlength="14" oninput="mascaraCPF(event)" />
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" required maxlength="15" oninput="mascaraTelefone(event)" />
+      </div>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <p id="mensagem" style="display: none;">Cadastro ou Login realizado com sucesso!</p>
+  </div>
+
+  <script>
+    // Função para permitir apenas números no campo CPF e formatá-lo
+    function mascaraCPF(event) {
+      let valor = event.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+      if (valor.length <= 11) {
+        valor = valor.replace(/(\d{3})(\d{3})(\d{3})(\d{1})/, '$1.$2.$3-$4'); // Formato CPF
+        event.target.value = valor;
+      } else {
+        event.target.value = valor.slice(0, 14); // Limita ao tamanho máximo de um CPF
+      }
+    }
+
+    // Função para permitir apenas números no campo Telefone e formatá-lo
+    function mascaraTelefone(event) {
+      let valor = event.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+      if (valor.length <= 11) {
+        if (valor.length <= 10) {
+          valor = valor.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3'); // Formato telefone fixo
+        } else {
+          valor = valor.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3'); // Formato telefone móvel
+        }
+        event.target.value = valor;
+      } else {
+        event.target.value = valor.slice(0, 15); // Limita ao tamanho máximo de um telefone
+      }
+    }
+
+    // Ação para exibir a mensagem de sucesso após o envio do formulário
+    document.getElementById("reservationForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("mensagem").style.display = "block"; // Exibe a mensagem
+    });
+  </script>
+</body>
 </html>
